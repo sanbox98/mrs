@@ -34,15 +34,15 @@ steps:
     mount:
     - .cache
   commands:
+  - echo $STAGING_ENV
+  - echo $ECOLE_ENV
+  - echo $PRODUCTION_ENV
   - ./do pip.dev
   - ./do py.test
 
 - name: qa
   image: yourlabs/python
   commands:
-  - echo $STAGING_ENV
-  - echo $ECOLE_ENV
-  - echo $PRODUCTION_ENV
   - HOME=$(pwd) venv=none ./do py.qa
 
 - name: safety
