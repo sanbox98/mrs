@@ -24,6 +24,12 @@ steps:
     DB_NAME: test
     XDG_CACHE_HOME: /drone/.cache
     venv: none
+    PRODUCTION_ENV:
+      from_secret: PRODUCTION_ENV
+    STAGING_ENV:
+      from_secret: STAGING_ENV
+    ECOLE_ENV:
+      from_secret: ECOLE_ENV
   cache:
     mount:
     - .cache
@@ -34,6 +40,9 @@ steps:
 - name: qa
   image: yourlabs/python
   commands:
+  - echo $STAGING_ENV
+  - echo $ECOLE_ENV
+  - echo $PRODUCTION_ENV
   - HOME=$(pwd) venv=none ./do py.qa
 
 - name: safety
